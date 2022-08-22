@@ -1,4 +1,5 @@
-There are n no of boxes and and m no of queens
+
+There are n no of boxes and m no of queens
 we have to place m queens in n boxes
 
 Input<br>
