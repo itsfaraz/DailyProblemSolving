@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class ConsecutiveSequence {
 
     /*
-        We have unsorted array in which we have to findout longest consecutive sequence and then
-        print it as a output
+        We have unsorted array in which we have to find-out the longest consecutive sequence and then
+        print it as an output
 
         What is Consecutive Sequence ?
         A series of incremented value, example (1,2,3,4,5)
@@ -36,9 +36,9 @@ public class ConsecutiveSequence {
 
         int []input = {2,12,9,16,10,5,3,20,25,11,1,8,6};
         int []input1 = {15,13,23,21,19,11,16};
-        ArrayList<Integer> output = longestConsecutiveSequence(input);
-        System.out.println(output);
-
+//        ArrayList<Integer> output = longestConsecutiveSequence(input);
+//        System.out.println(output);
+        longestConsecutiveSequenceV2(input1);
     }
 
     public static ArrayList<Integer> longestConsecutiveSequence(int []input){
@@ -87,4 +87,46 @@ public class ConsecutiveSequence {
         return total;
     }
 
+
+//    Approach 2
+    public static ArrayList<Integer> longestConsecutiveSequenceV2(int []input){
+        ArrayList<Integer> output = new ArrayList<Integer>();
+        HashMap<Integer,Boolean> myMap = new HashMap<Integer,Boolean>();
+
+        for (int element : input){
+            if (myMap.containsKey(element-1)){
+                myMap.put(element,false);
+            }else {
+              myMap.put(element,true);
+            }
+            if (myMap.containsKey(element+1) && myMap.get(element+1)){
+                myMap.put(element+1,false);
+            }
+        }
+        int longest = 0;
+        int startingElement = 0;
+        for (int element : input){
+           if (myMap.containsKey(element) && myMap.get(element)){
+               int count = 1;
+               int tempElement = element+1;
+               while (myMap.containsKey(tempElement) && !myMap.get(tempElement)){
+                   count+=1;
+                   tempElement+=1;
+               }
+               if (count > longest){
+                   longest = count;
+                   startingElement = element;
+               }
+           }
+        }
+
+        for (int start = startingElement; start <= startingElement+longest-1; start++)
+            System.out.print(start+" ");
+
+//        System.out.println("Starting Element :- "+startingElement+" , Count :- "+longest);
+
+        return output;
+    }
+
 }
+
