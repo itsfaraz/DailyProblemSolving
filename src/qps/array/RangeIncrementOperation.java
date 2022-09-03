@@ -1,4 +1,4 @@
-package basic.hashmap.questions;
+package qps.array;
 
 /*
 
