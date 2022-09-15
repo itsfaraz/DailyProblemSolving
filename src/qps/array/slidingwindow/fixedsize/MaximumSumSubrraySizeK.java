@@ -7,6 +7,14 @@ public class MaximumSumSubrraySizeK {
         System.out.println(maximumSubarrraySum(arr,3));
     }
 
+    /*
+
+        Given an array for example[2,5,1,8,2,9,1] find maximum sub-array sum
+        k size of sub-array
+        intput : arr = {2,5,1,8,2,9,1}, k = 3
+        output : 19
+    * */
+
     public static int maximumSubarrraySum(int []arr,int k){
         int maxResult = 0;
         int i = 0;

@@ -1,5 +1,8 @@
 package qps.array.slidingwindow.fixedsize;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class NegativeInteger {
 
     /*
@@ -15,8 +18,9 @@ public class NegativeInteger {
 
         int[] arr = {12, -1, -7, 8, -15, 30, 16, 28};
         int k = 3;
-        kNegativeIntegersBrute(arr,k);
-//        kNegativeIntegers(arr, k);
+//        kNegativeIntegersBrute(arr,k);
+//        kNegativeIntegersAverage(arr, k);
+        kNegativeIntegerOptimized(arr,k);
     }
 
     public static void kNegativeIntegersBrute(int[] arr, int k) {
@@ -29,7 +33,8 @@ public class NegativeInteger {
         }
     }
 
-    public static void kNegativeIntegers(int[] arr, int k) {
+//    Time Complexity :- O(n+k)
+    public static void kNegativeIntegersAverage(int[] arr, int k) {
         int i = 0;
         int j = 0;
         while (j < arr.length) {
@@ -44,6 +49,37 @@ public class NegativeInteger {
                 i++;
             }
         }
+    }
+
+    public static void kNegativeIntegerOptimized(int[] arr, int k){
+        int i = 0;
+        int j = 0;
+        Queue<Integer> queue = new LinkedList<Integer>();
+        while (j < arr.length) {
+            int windowSize = (j - i) + 1;
+            if (arr[j] < 0){
+                queue.add(arr[j]);
+            }
+            if (windowSize < k) {
+                j++;
+            } else if (windowSize == k) {
+                int result = 0;
+                if (queue.isEmpty())
+                    result = 0;
+                else{
+                    result = queue.peek();
+                    if (queue.contains(arr[i]))
+                        queue.remove(arr[i]);
+                }
+                System.out.print(result+" ");
+
+                i++;
+                j++;
+            } else {
+                i++;
+            }
+        }
+
     }
 
     public static int findNegativeInteger(int start, int end, int[] arr) {
